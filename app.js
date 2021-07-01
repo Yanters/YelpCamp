@@ -56,6 +56,18 @@ app.get('/campgrounds/:id/edit', async (req, res) => {
     res.render('campgrounds/edit', { campground });
 })
 
+app.put('/campgrounds/:id', async (req, res) => {
+    const { id } = req.params;
+    const campgorund = await Campground.findByIdAndUpdate(id, { ...req.body.campground }, { new: true });
+    res.redirect(`/campgrounds/${campgorund._id}`);
+})
+
+app.delete('/campgrounds/:id', async (req, res) => {
+    const { id } = req.params;
+    await Campground.findByIdAndDelete(id);
+    res.redirect(`/campgrounds`);
+})
+
 app.get('*', (req, res) => {
     res.send('Wrong URL!');
 })
