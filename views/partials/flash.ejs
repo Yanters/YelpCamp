@@ -1,8 +1,13 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <% if(success && success.length){ %>
-    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert"
+        data-auto-dismiss="2000">
         <%= success %>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
+
     <% } %>
 
 
@@ -11,4 +16,18 @@
                 <%= error %>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+
             <% } %>
+
+                <script type="text/javascript">
+
+                    $(document).ready(function () {
+
+                        window.setTimeout(function () {
+                            $(".alert").fadeTo(1000, 0).slideUp(1000, function () {
+                                $(this).remove();
+                            });
+                        }, 1000);
+
+                    });
+                </script>
