@@ -27,10 +27,11 @@ const validateReview = (req, res, next) => {
         next();
     }
 }
-
-router.post('/', validateReview, catchAsync(async (req, res) => {
+//validateReview,
+router.post('/', catchAsync(async (req, res) => {
+    const rating = parseInt(req.body.review.rating);
     const campground = await Campground.findById(req.params.id);
-    const review = new Review(req.body.review);
+    const review = new Review({ body: req.body.review.body, rating: rating });
     campground.reviews.push(review);
     await review.save();
     await campground.save();
