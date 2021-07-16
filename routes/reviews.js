@@ -6,27 +6,9 @@ const ExpressError = require('../utils/ExpressError');
 const Campground = require('../models/campground');
 const Review = require('../models/review');
 const { campgroundSchema, reviewSchema } = require('../schemas.js');
-
-const validateCampground = (req, res, next) => {
-    const { error } = campgroundSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(', ');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-}
+const { validateReview } = require('../middleware');
 
 
-const validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(', ');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-}
 //validateReview,
 router.post('/', catchAsync(async (req, res) => {
     const rating = parseInt(req.body.review.rating);
