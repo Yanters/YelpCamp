@@ -48,15 +48,15 @@
         <div class="col-6">
             <% if(currentUser){%>
                 <h2>Leave a review</h2>
-                <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-3 validated-form"
-                    novalidate>
+                <form action="/campgrounds/<%= campground._id %>/reviews" method="POST"
+                    class="mb-3 validated-form reviewForm" novalidate>
                     <div class="mb-3">
                         <%- include('../partials/rating') %>
-
-
                             <!-- <label class="form-label" for="rating">Rating:</label>
                     <input class="form-range" type="range" min=1 max=5 step=1 name="review[rating]" id="rating"> -->
                     </div>
+                    <p id="status" class="d-none my-0 text-danger mb-2">Please Select Rating</p>
+
                     <div class="mb-3">
                         <label class="form-label" for="body">Review:</label>
                         <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
@@ -94,3 +94,35 @@
                         <%} %>
         </div>
     </div>
+    <script>
+        const reviewForm = document.querySelector(".reviewForm");
+        const defaultStarInput = document.querySelectorAll("input[name='review[rating]']");
+        const statusContainer = document.querySelector("#status");
+        const feedbackDiv = document.querySelector('.feedback')
+
+        if (reviewForm) {
+            var checkedStar = false;
+            reviewForm.addEventListener("submit", function (e) {
+                for (var i = 0; i < defaultStarInput.length; ++i) {
+                    if (defaultStarInput[i].checked) {
+                        checkedStar = true;
+                    }
+                }
+                if (!checkedStar) {
+                    statusContainer.classList.remove("d-none");
+                    feedbackDiv.classList.add('unchecked');
+
+                    e.preventDefault();
+                } else {
+                    statusContainer.classList.add("d-none");
+                    feedbackDiv.classList.remove('unchecked');
+                }
+            })
+        }
+        for (var i = 0; i < defaultStarInput.length; ++i) {
+            defaultStarInput[i].addEventListener('change', function () {
+                statusContainer.classList.add("d-none");
+                feedbackDiv.classList.remove('unchecked');
+            });
+        }
+    </script>
