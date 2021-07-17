@@ -70,11 +70,11 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/fakeUser', async (req, res) => {
-    const user = new User({ email: 'test@wp.pl', username: 'test' });
-    const newUser = await User.register(user, 'monkey');
-    res.send(newUser);
-})
+// app.get('/fakeUser', async (req, res) => {
+//     const user = new User({ email: 'test@wp.pl', username: 'test' });
+//     const newUser = await User.register(user, 'monkey');
+//     res.send(newUser);
+// })
 
 app.use('/campgrounds', campgroundsRoute);
 app.use('/campgrounds/:id/reviews', reviewRoute);
