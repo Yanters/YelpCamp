@@ -19,11 +19,12 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.isLoggedInForAReview = (req, res, next) => {
     // console.log('Req.user: ', req.user);
     console.log(req.originalUrl);
-    req.session.returnTo = req.originalUrl.replace('reviews', '');
+    req.session.returnTo = req.originalUrl.replace('/reviews', '');
     console.log('Link to go back to:', req.session.returnTo);
     if (!req.isAuthenticated()) {
         req.flash('error', 'You must be logged in to do that.')
         req.session.reviewData = req.body.review;
+        req.session.reviewData.url = req.originalUrl.replace('/reviews', '');
         return res.redirect('/login');
     }
     next();
