@@ -8,8 +8,22 @@ module.exports.isLoggedIn = (req, res, next) => {
     // console.log('Req.user: ', req.user);
     // console.log(req.originalUrl);
     req.session.returnTo = req.originalUrl;
+    console.log('Link to go back to:', req.session.returnTo);
     if (!req.isAuthenticated()) {
         req.flash('error', 'You must be logged in to do that.')
+        return res.redirect('/login');
+    }
+    next();
+}
+
+module.exports.isLoggedInForAReview = (req, res, next) => {
+    // console.log('Req.user: ', req.user);
+    console.log(req.originalUrl);
+    req.session.returnTo = req.originalUrl.replace('reviews', '');
+    console.log('Link to go back to:', req.session.returnTo);
+    if (!req.isAuthenticated()) {
+        req.flash('error', 'You must be logged in to do that.')
+        req.session.reviewData = req.body.review;
         return res.redirect('/login');
     }
     next();
@@ -29,6 +43,7 @@ module.exports.validateCampground = (req, res, next) => {
 module.exports.validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);
     if (error) {
+        console.log('ValidateReview Error');
         const msg = error.details.map(el => el.message).join(', ');
         throw new ExpressError(msg, 400);
     } else {

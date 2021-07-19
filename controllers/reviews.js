@@ -5,6 +5,7 @@ module.exports.createReview = async (req, res) => {
     // const rating = parseInt(req.body.review.rating);
     const campground = await Campground.findById(req.params.id);
     // const review = new Review({ body: req.body.review.body, rating: rating });
+    delete req.session.reviewData;
     const review = new Review(req.body.review);
     review.author = req.user._id;
     campground.reviews.push(review);

@@ -33,7 +33,8 @@ module.exports.showCampground = async (req, res) => {
         req.flash('error', 'Cannot find that campground.');
         return res.redirect('/campgrounds');
     }
-    res.render('campgrounds/show', { campground });
+    const reviewData = req.session.reviewData;
+    res.render('campgrounds/show', { campground, reviewData });
 }
 
 module.exports.renderEditForm = async (req, res) => {

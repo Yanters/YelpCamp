@@ -29,8 +29,9 @@ module.exports.renderLogin = (req, res) => {
 module.exports.login = (req, res) => {
     req.flash('success', 'Welcome Back!');
     const redirectUrl = req.session.returnTo || '/campgrounds';
+    console.log('After logging in: ', req.session.returnTo)
     delete req.session.returnTo;
-    // console.log(redirectUrl);
+    console.log('After deleting:', redirectUrl);
     res.redirect(redirectUrl);
 }
 
