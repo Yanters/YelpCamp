@@ -4,10 +4,12 @@
     }
 </style>
 <link rel="stylesheet" href="/stylesheets/rating.css">
+
 <% layout('layout/boilerplate')%>
 
     <div class="row">
         <div class="col-6">
+            <div id='map' style='width: 400px; height: 300px;'></div>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <% if(campground.images.length> 1){ %>
@@ -157,3 +159,8 @@
             });
         }
     </script>
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        const campground = <%- JSON.stringify(campground) %>
+    </script>
+    <script src="/javascripts/showPageMap.js"></script>
