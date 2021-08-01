@@ -1,61 +1,63 @@
 <% layout('layout/boilerplate')%>
 
-<style>
+    <style>
         .card-img-top {
             height: 18vw;
             object-fit: cover;
         }
+
     </style>
 
-<div class="col-md-8 offset-md-2 col-xl-6 offset-xl-3 mb-4">
-                <div class="card shadow">
-                    <img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
-                        alt="" class="card-img-top"  />
-                    <div class="card-body">
-                        <h2 class="card-title mb-3">New Campground</h2>
-<form method="POST" action="/campgrounds" novalidate class="validated-form" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label class="form-label" for="title">Title:</label>
-                    <input class="form-control" type="text" name="campground[title]" id="title" required>
-                    <div class="invalid-feedback">Please provide a valid title.</div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="location">Location:</label>
-                    <input class="form-control" type="text" name="campground[location]" id="location" required>
-                    <div class="invalid-feedback">Please provide a valid location.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label">Upload Images:</label>
-                    <input type="file" class="form-control" id="formFileMultiple" name="image" multiple required>
-                    <div class="invalid-feedback">
-                        This campground would look much better with a picture.
+    <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-3 mb-4">
+        <div class="card shadow">
+            <img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
+                alt="" class="card-img-top" />
+            <div class="card-body">
+                <h2 class="card-title mb-3">New Campground</h2>
+                <form method="POST" action="/campgrounds" novalidate class="validated-form"
+                    enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Title:</label>
+                        <input class="form-control" type="text" name="campground[title]" id="title" required>
+                        <div class="invalid-feedback">Please provide a valid title.</div>
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="location">Location:</label>
+                        <input class="form-control" type="text" name="campground[location]" id="location" required>
+                        <div class="invalid-feedback">Please provide a valid location.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Upload Images:</label>
+                        <input type="file" class="form-control" id="formFileMultiple" name="image" multiple required>
+                        <div class="invalid-feedback">
+                            This campground would look much better with a picture.
+                        </div>
+                    </div>
 
-                <!-- <div class="mb-3">
+                    <!-- <div class="mb-3">
                     <label class="form-label" for="image">Image Url:</label>
                     <input class="form-control" type="url" name="campground[image]" id="image" required>
                     <div class="invalid-feedback">Please provide a valid Url.</div>
                 </div> -->
 
-                <div class="mb-3">
-                    <label class="form-label" for="price">Campgorund Price:</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="price-label">$</span>
-                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
-                            aria-describedby="price-label" name="campground[price]" required>
-                        <div class="invalid-feedback">Please provide a valid price.</div>
+                    <div class="mb-3">
+                        <label class="form-label" for="price">Campgorund Price:</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="price-label">$</span>
+                            <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                                aria-describedby="price-label" name="campground[price]" required>
+                            <div class="invalid-feedback">Please provide a valid price.</div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="description">Description:</label>
-                    <textarea class="form-control" type="text" name="campground[description]" id="description"
-                        required></textarea>
-                </div>
-                <div class="mb-3"> <button class="btn btn-success">Add Campground</button></div>
-            </form>
-  <a class="btn btn-sm btn-outline-info" href=" /campgrounds/"><b>Go back</b></a>
-                    </div>          
-                </div>
-</div>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description:</label>
+                        <textarea class="form-control" type="text" name="campground[description]" id="description"
+                            required></textarea>
+                    </div>
+                    <div class="mb-3"> <button class="btn btn-success">Add Campground</button></div>
+                </form>
+                <a class="btn btn-sm btn-outline-info" href=" /campgrounds/"><b>Go back</b></a>
+            </div>
+        </div>
+    </div>
