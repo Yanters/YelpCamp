@@ -17,13 +17,15 @@ const LocalStrategy = require( 'passport-local' );
 const User = require( './models/user' );
 const mongoSanitize = require( 'express-mongo-sanitize' )
 const helmet = require( 'helmet' );
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
+const MongoStore = require('connect-mongo');
 
 const campgroundsRoute = require( './routes/campgrounds' )
 const reviewRoute = require( './routes/reviews' )
 const userRoute = require( './routes/users' )
 
-mongoose.connect( 'mongodb://localhost:27017/yelp-camp', {
+mongoose.connect(dbUrl , {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -51,10 +53,24 @@ app.use( mongoSanitize( {
     replaceWith: '#'
 }));
 
+const secret = process.env.SECRET || 'somesecretiwonttellyou';
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret
+    }
+});
+
+store.on('error', function (e){
+    console.log('Session store error',e);
+})
 
 const sessionConfig = {
+    store,
     name: 'session',
-    secret: 'somesecretiwonttellyou',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -131,7 +147,7 @@ passport.deserializeUser( User.deserializeUser() );
 
 app.use( ( req, res, next ) =>
 {
-    console.log( req.query );
+    // console.log( req.query );
     // console.log(req.session);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash( 'success' );
