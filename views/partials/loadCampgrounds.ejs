@@ -1,0 +1,79 @@
+<script>
+    
+    window.addEventListener('scroll',() => 
+         {
+            if(indexNumber<CampgroundsSize-1)
+            {               
+                if(window.scrollY + window.innerHeight + 50 >= document.documentElement.scrollHeight)
+                {
+
+                    indexNumber++;
+                    // console.log('Added one more!',indexNumber)
+                    // console.log(campgrounds.features[indexNumber].title);
+
+                    const main = document.querySelector('main');
+
+                    const card = document.createElement('div');
+                    card.setAttribute('class', 'card mb-3');
+
+                    const cardRow = document.createElement('div');
+                    cardRow.setAttribute('class', 'row');
+
+                    const cardImageDiv = document.createElement('div');
+                    cardImageDiv.setAttribute('class', 'col-md-4');
+
+                    const cardImage = document.createElement('img');
+                    cardImage.setAttribute('class', 'img-fluid');
+                    cardImage.setAttribute('style', 'border-radius: 5px');
+                    cardImage.setAttribute('src', campgrounds.features[indexNumber].images[0].url);
+                    
+                    const cardInfoDiv = document.createElement('div');
+                    cardInfoDiv.setAttribute('class', 'col-md-8');
+                    
+                    const cardInfoBody = document.createElement('div');
+                    cardInfoBody.setAttribute('class', 'card-body');
+                    
+                    const cardInfoBodyTitle = document.createElement('h5');
+                    cardInfoBodyTitle.setAttribute('class', 'card-title');
+                    cardInfoBodyTitle.innerText = campgrounds.features[indexNumber].title;
+                    
+                    const cardInfoBodyDescription = document.createElement('p');
+                    cardInfoBodyDescription.setAttribute('class', 'card-text');
+                    cardInfoBodyDescription.innerText = campgrounds.features[indexNumber].description;
+            
+                    const cardInfoBodyPrice = document.createElement('p');
+                    cardInfoBodyPrice.setAttribute('class', 'card-text');
+                    cardInfoBodyPrice.innerText = `$${campgrounds.features[indexNumber].price}/day`;
+                
+                    const cardInfoBodyLocation = document.createElement('p');
+                    cardInfoBodyLocation.setAttribute('class', 'card-text');
+                    const cardInfoBodyLocationText = document.createElement('small');
+                    cardInfoBodyLocationText.setAttribute('class', 'text-muted');
+                    cardInfoBodyLocationText.innerText = campgrounds.features[indexNumber].location ;
+                    cardInfoBodyLocation.append(cardInfoBodyLocationText);
+
+                    const ViewLink = document.createElement('a');
+                    ViewLink.setAttribute('class', 'btn btn-primary');
+                    ViewLink.setAttribute('href', `/campgrounds/${campgrounds.features[indexNumber]._id}`);
+                    ViewLink.innerText = `View ${campgrounds.features[indexNumber].title}`;
+
+                    cardImageDiv.appendChild(cardImage);
+                    cardRow.appendChild(cardImageDiv);
+
+
+                    cardInfoBody.appendChild(cardInfoBodyTitle);
+                    cardInfoBody.appendChild(cardInfoBodyDescription);
+                    cardInfoBody.appendChild(cardInfoBodyPrice);
+                    cardInfoBody.appendChild(cardInfoBodyLocation);
+                    cardInfoBody.appendChild(ViewLink);
+                    cardInfoDiv.appendChild(cardInfoBody);
+                    cardRow.appendChild(cardInfoDiv);
+
+                    card.appendChild(cardRow);
+                    main.appendChild(card); 
+                }
+            }
+
+        });
+
+</script>
