@@ -2,7 +2,7 @@ const { campgroundSchema, reviewSchema } = require('./schemas.js');
 const ExpressError = require('./utils/ExpressError');
 const Campground = require('./models/campground');
 const Review = require('./models/review');
-
+const mongoose = require('mongoose');
 
 module.exports.isLoggedIn = (req, res, next) => {
     // console.log('Req.user: ', req.user);
@@ -30,6 +30,21 @@ module.exports.isLoggedInForAReview = (req, res, next) => {
     next();
 }
 
+module.exports.isCampground = async (req,res,next)=>{
+  
+    if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        // console.log('early err');
+        req.flash('error', `Sorry, that campground does not exist!`);
+        return res.redirect('/campgrounds');
+        } 
+
+        await Campground.findById(req.params.id, function(err, foundCampground){
+        if(err || !foundCampground){
+            req.flash('error', 'Sorry, that campground does not exist!');
+            return res.redirect('/campgrounds');
+        }})
+        next();
+}
 
 module.exports.validateCampground = (req, res, next) => {
     const { error } = campgroundSchema.validate(req.body);

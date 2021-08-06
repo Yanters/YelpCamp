@@ -183,6 +183,7 @@ app.all( '*', ( req, res, next ) =>
 
 app.use( ( err, req, res, next ) =>
 {
+    console.log('app.js err');
     const { status = 500 } = err;
     if ( !err.message ) err.message = 'Something Went Wrong';
     res.status( status ).render( 'error', { err } );
