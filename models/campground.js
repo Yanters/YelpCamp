@@ -16,7 +16,7 @@ ImageSchema.virtual('cardImage').get(function () {
     return this.url.replace('/upload', '/upload/ar_4:3,c_crop');
 })
 
-const opts = { toJSON: { virtuals: true } };
+const opts = { toJSON: { virtuals: true }, timestamps: true };
 
 const campgroundSchema = new Schema({
     title: String,

@@ -72,7 +72,8 @@
                     </div>
                     <% } %>
                         <div class="card-footer text-muted">
-                            2 days ago
+                            <% const time = campground.updatedAt.toISOString().slice(0, 19).replace('T', ' ');%>
+                            <%= time %> 
                         </div>
             </div>
 
