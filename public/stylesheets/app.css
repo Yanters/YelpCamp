@@ -3,3 +3,16 @@
     height: 500px;
     border-radius: 10px;
 }
+
+.card{
+    margin-bottom: 2vh;
+}
+
+@media (max-width: 576px) {
+    #map { 
+    height: 40vh;
+    }
+    .card{
+        margin-bottom: 3vh;
+    }
+    }
